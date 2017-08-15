@@ -1,8 +1,13 @@
 package io.spring.application.user;
 
-import org.springframework.data.repository.CrudRepository;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Component;
 
-public interface UserReadService extends CrudRepository<UserData, String> {
+@Component
+@Mapper
+public interface UserReadService {
 
+    UserData findByUsername(@Param("username") String username);
 }
 

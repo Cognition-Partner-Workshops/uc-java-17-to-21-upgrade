@@ -11,10 +11,8 @@ import javax.persistence.Id;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
 @JsonRootName("user")
 public class UserData {
-    @Id
     private String id;
     private String email;
     private String username;
