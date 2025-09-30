@@ -57,18 +57,23 @@ Alternatively, you can run
 
 ## Frontend (Next.js)
 
-You'll need Node.js installed (v14-16 recommended, or use `NODE_OPTIONS=--openssl-legacy-provider` with newer versions).
+You'll need Node.js installed. **Recommended: Node v14-16** (specified in `frontend/.nvmrc`).
 
-    cd frontend
-    npm install
-    npm run dev
+If using `nvm`, switch to the correct version:
+```bash
+cd frontend
+nvm use
+```
+
+Then install and run:
+```bash
+npm install
+npm run dev
+```
 
 The frontend will run on http://localhost:3000 and connect to the backend on port 8080.
 
-**Note**: If using Node.js v17+, run with:
-```bash
-NODE_OPTIONS=--openssl-legacy-provider npm run dev
-```
+**Note**: The `npm run dev` script includes `NODE_OPTIONS=--openssl-legacy-provider` for compatibility with newer Node versions, but Node 14-16 is still recommended for best compatibility.
 
 # Try it out with [Docker](https://www.docker.com/)
 

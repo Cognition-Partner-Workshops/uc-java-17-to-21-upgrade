@@ -2,8 +2,11 @@
   "name": "next-realworld-example-app",
   "version": "1.0.0",
   "author": "reck1ess",
+  "engines": {
+    "node": ">=14.0.0 <=16.x"
+  },
   "scripts": {
-    "dev": "next dev",
+    "dev": "NODE_OPTIONS=--openssl-legacy-provider next dev",
     "build": "next build",
     "start": "next start"
   },
