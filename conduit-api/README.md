@@ -42,6 +42,24 @@ The secret key is stored in `application.properties`.
 
 It uses a ~~H2 in-memory database~~ sqlite database (for easy local test without losing test data after every restart), can be changed easily in the `application.properties` for any other database.
 
+## Sample Data & Login Credentials
+
+The application includes seed data with sample users, articles, tags, comments, and social interactions. You can log in with any of these accounts:
+
+| Username | Email | Password |
+|----------|-------|----------|
+| johndoe | john@example.com | password123 |
+| janedoe | jane@example.com | password123 |
+| bobsmith | bob@example.com | password123 |
+
+**Seed data includes:**
+- 3 users with profiles
+- 5 articles on Spring Boot, REST APIs, Microservices, Docker, and Testing
+- 7 tags (java, spring-boot, web-development, tutorial, best-practices, microservices, api-design)
+- 5 comments on articles
+- 6 article favorites
+- 4 follow relationships between users
+
 # Getting started
 
 ## Backend (Spring Boot)
