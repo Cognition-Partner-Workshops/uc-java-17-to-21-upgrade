@@ -44,6 +44,8 @@ It uses a ~~H2 in-memory database~~ sqlite database (for easy local test without
 
 # Getting started
 
+## Backend (Spring Boot)
+
 You'll need Java 11 installed.
 
     ./gradlew bootRun
@@ -52,6 +54,21 @@ To test that it works, open a browser tab at http://localhost:8080/tags .
 Alternatively, you can run
 
     curl http://localhost:8080/tags
+
+## Frontend (Next.js)
+
+You'll need Node.js installed (v14-16 recommended, or use `NODE_OPTIONS=--openssl-legacy-provider` with newer versions).
+
+    cd frontend
+    npm install
+    npm run dev
+
+The frontend will run on http://localhost:3000 and connect to the backend on port 8080.
+
+**Note**: If using Node.js v17+, run with:
+```bash
+NODE_OPTIONS=--openssl-legacy-provider npm run dev
+```
 
 # Try it out with [Docker](https://www.docker.com/)
 
