@@ -68,6 +68,8 @@ You'll need Java 11 installed.
 
     ./gradlew bootRun
 
+**Note**: `bootRun` automatically cleans and recreates the database with seed data on each run to avoid Flyway migration conflicts during development.
+
 To test that it works, open a browser tab at http://localhost:8080/tags .  
 Alternatively, you can run
 

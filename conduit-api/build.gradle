@@ -96,3 +96,10 @@ tasks.named('generateJava') {
     schemaPaths = ["${projectDir}/src/main/resources/schema"] // List of directories containing schema files
     packageName = 'io.spring.graphql' // The package name to use to generate sources
 }
+
+// Clean database before running to avoid Flyway migration conflicts
+tasks.named('bootRun') {
+    doFirst {
+        delete './dev.db'
+    }
+}
