@@ -80,11 +80,41 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter-test:2.2.2'
     testImplementation 'org.mockito:mockito-inline:4.0.0'
+    
+    // Selenium E2E testing
+    testImplementation 'org.seleniumhq.selenium:selenium-java:4.15.0'
+    testImplementation 'io.github.bonigarcia:webdrivermanager:5.6.2'
+    testImplementation 'org.testng:testng:7.8.0'
+    testImplementation 'com.aventstack:extentreports:5.1.1'
+    testImplementation 'org.apache.httpcomponents.client5:httpclient5:5.2.1'
 }
 
 tasks.named('test') {
 	useJUnitPlatform()
+	// Exclude Selenium tests from JUnit test task
+	exclude 'io/spring/selenium/**'
 	finalizedBy jacocoTestReport
+}
+
+// Separate task for Selenium E2E tests using TestNG
+tasks.register('seleniumTest', Test) {
+	description = 'Run Selenium E2E tests'
+	group = 'verification'
+	
+	useTestNG {
+		suites 'src/test/resources/selenium/testng-smoke.xml'
+	}
+	
+	// Only include Selenium tests
+	include 'io/spring/selenium/**'
+	
+	testLogging {
+		events "passed", "skipped", "failed"
+		showStandardStreams = true
+	}
+	
+	// Don't fail the build on test failures (for CI reporting)
+	ignoreFailures = false
 }
 
 tasks.named('clean') {
