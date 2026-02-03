@@ -42,16 +42,58 @@ The secret key is stored in `application.properties`.
 
 It uses a ~~H2 in-memory database~~ sqlite database (for easy local test without losing test data after every restart), can be changed easily in the `application.properties` for any other database.
 
+## Sample Data & Login Credentials
+
+The application includes seed data with sample users, articles, tags, comments, and social interactions. You can log in with any of these accounts:
+
+| Username | Email | Password |
+|----------|-------|----------|
+| johndoe | john@example.com | password123 |
+| janedoe | jane@example.com | password123 |
+| bobsmith | bob@example.com | password123 |
+
+**Seed data includes:**
+- 3 users with profiles
+- 5 articles on Spring Boot, REST APIs, Microservices, Docker, and Testing
+- 7 tags (java, spring-boot, web-development, tutorial, best-practices, microservices, api-design)
+- 5 comments on articles
+- 6 article favorites
+- 4 follow relationships between users
+
 # Getting started
+
+## Backend (Spring Boot)
 
 You'll need Java 11 installed.
 
     ./gradlew bootRun
 
+**Note**: `bootRun` automatically cleans and recreates the database with seed data on each run to avoid Flyway migration conflicts during development.
+
 To test that it works, open a browser tab at http://localhost:8080/tags .  
 Alternatively, you can run
 
     curl http://localhost:8080/tags
+
+## Frontend (Next.js)
+
+You'll need Node.js installed. **Recommended: Node v14-16** (specified in `frontend/.nvmrc`).
+
+If using `nvm`, switch to the correct version:
+```bash
+cd frontend
+nvm use
+```
+
+Then install and run:
+```bash
+npm install
+npm run dev
+```
+
+The frontend will run on http://localhost:3000 and connect to the backend on port 8080.
+
+**Note**: The `npm run dev` script includes `NODE_OPTIONS=--openssl-legacy-provider` for compatibility with newer Node versions, but Node 14-16 is still recommended for best compatibility.
 
 # Try it out with [Docker](https://www.docker.com/)
 
