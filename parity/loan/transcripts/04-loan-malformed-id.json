@@ -1,0 +1,54 @@
+{
+  "scenario": "loan-malformed-id",
+  "exchanges": [
+    {
+      "request": {
+        "method": "GET",
+        "path": "/api/loans/%20",
+        "auth": false,
+        "body": null
+      },
+      "response": {
+        "status": 500,
+        "contentType": "application/json",
+        "body": {
+          "error": "Internal Server Error",
+          "path": "/api/loans/%20",
+          "status": 500,
+          "timestamp": "<TIMESTAMP>"
+        }
+      }
+    },
+    {
+      "request": {
+        "method": "GET",
+        "path": "/api/loans/LN-2019-00142%2Fx",
+        "auth": false,
+        "body": null
+      },
+      "response": {
+        "status": 400,
+        "contentType": "text/html",
+        "body": "HTTP Status 400 – Bad Request"
+      }
+    },
+    {
+      "request": {
+        "method": "GET",
+        "path": "/api/loans/999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999",
+        "auth": false,
+        "body": null
+      },
+      "response": {
+        "status": 500,
+        "contentType": "application/json",
+        "body": {
+          "error": "Internal Server Error",
+          "path": "/api/loans/999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999",
+          "status": 500,
+          "timestamp": "<TIMESTAMP>"
+        }
+      }
+    }
+  ]
+}

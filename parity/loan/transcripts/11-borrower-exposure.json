@@ -1,0 +1,145 @@
+{
+  "scenario": "borrower-exposure",
+  "exchanges": [
+    {
+      "request": {
+        "method": "GET",
+        "path": "/api/borrowers/B-10001/exposure",
+        "auth": false,
+        "body": null
+      },
+      "response": {
+        "status": 200,
+        "contentType": "application/json",
+        "body": {
+          "borrowerId": "B-10001",
+          "borrowerName": "James Mitchell",
+          "creditScore": 745,
+          "lastPaymentDate": "2025-12-15",
+          "loanCount": 1,
+          "maxDaysPastDue": 0,
+          "outstandingBalanceDisplay": "£271,432.56",
+          "riskBand": "LOW",
+          "selfLink": "https://loans.example.com/api/borrowers/B-10001/exposure",
+          "totalEscrowBalance": 3245.8,
+          "totalLateFees": 0.0,
+          "totalOriginalAmount": 285000,
+          "totalOutstandingBalance": 271432.56,
+          "totalPaid": 2974.04
+        }
+      }
+    },
+    {
+      "request": {
+        "method": "GET",
+        "path": "/api/borrowers/B-10002/exposure",
+        "auth": false,
+        "body": null
+      },
+      "response": {
+        "status": 200,
+        "contentType": "application/json",
+        "body": {
+          "borrowerId": "B-10002",
+          "borrowerName": "Sarah Chen",
+          "creditScore": 780,
+          "lastPaymentDate": "2025-12-01",
+          "loanCount": 1,
+          "maxDaysPastDue": 0,
+          "outstandingBalanceDisplay": "£312,876.43",
+          "riskBand": "LOW",
+          "selfLink": "https://loans.example.com/api/borrowers/B-10002/exposure",
+          "totalEscrowBalance": 4890.12,
+          "totalLateFees": 0.0,
+          "totalOriginalAmount": 420000,
+          "totalOutstandingBalance": 312876.43,
+          "totalPaid": 5848.36
+        }
+      }
+    },
+    {
+      "request": {
+        "method": "GET",
+        "path": "/api/borrowers/B-10003/exposure",
+        "auth": false,
+        "body": null
+      },
+      "response": {
+        "status": 200,
+        "contentType": "application/json",
+        "body": {
+          "borrowerId": "B-10003",
+          "borrowerName": "Michael Torres",
+          "creditScore": 692,
+          "lastPaymentDate": "2025-12-01",
+          "loanCount": 1,
+          "maxDaysPastDue": 15,
+          "outstandingBalanceDisplay": "£178,234.12",
+          "riskBand": "ELEVATED",
+          "selfLink": "https://loans.example.com/api/borrowers/B-10003/exposure",
+          "totalEscrowBalance": 2100.0,
+          "totalLateFees": 47.5,
+          "totalOriginalAmount": 195000,
+          "totalOutstandingBalance": 178234.12,
+          "totalPaid": 2154.1
+        }
+      }
+    },
+    {
+      "request": {
+        "method": "GET",
+        "path": "/api/borrowers/B-10004/exposure",
+        "auth": false,
+        "body": null
+      },
+      "response": {
+        "status": 200,
+        "contentType": "application/json",
+        "body": {
+          "borrowerId": "B-10004",
+          "borrowerName": "Emily Johnson",
+          "creditScore": 810,
+          "lastPaymentDate": "2025-12-01",
+          "loanCount": 1,
+          "maxDaysPastDue": 0,
+          "outstandingBalanceDisplay": "£498,123.78",
+          "riskBand": "LOW",
+          "selfLink": "https://loans.example.com/api/borrowers/B-10004/exposure",
+          "totalEscrowBalance": 6750.0,
+          "totalLateFees": 0.0,
+          "totalOriginalAmount": 525000,
+          "totalOutstandingBalance": 498123.78,
+          "totalPaid": 4936.7
+        }
+      }
+    },
+    {
+      "request": {
+        "method": "GET",
+        "path": "/api/borrowers/B-10005/exposure",
+        "auth": false,
+        "body": null
+      },
+      "response": {
+        "status": 200,
+        "contentType": "application/json",
+        "body": {
+          "borrowerId": "B-10005",
+          "borrowerName": "Robert Williams",
+          "creditScore": 658,
+          "lastPaymentDate": "2025-12-01",
+          "loanCount": 1,
+          "maxDaysPastDue": 0,
+          "outstandingBalanceDisplay": "£142,567.90",
+          "riskBand": "WATCH",
+          "selfLink": "https://loans.example.com/api/borrowers/B-10005/exposure",
+          "totalEscrowBalance": 1890.45,
+          "totalLateFees": 0.0,
+          "totalOriginalAmount": 165000,
+          "totalOutstandingBalance": 142567.9,
+          "totalPaid": 1623.22
+        }
+      }
+    }
+  ]
+}

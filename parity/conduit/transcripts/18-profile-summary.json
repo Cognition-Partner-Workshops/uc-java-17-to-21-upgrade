@@ -1,0 +1,90 @@
+{
+  "scenario": "profile-summary",
+  "exchanges": [
+    {
+      "request": {
+        "method": "GET",
+        "path": "/profiles/parity-alice/summary",
+        "auth": false,
+        "body": null
+      },
+      "response": {
+        "status": 200,
+        "contentType": "application/json",
+        "body": {
+          "summary": {
+            "activity": [
+              "Wrote \"Parity Feed Two\" (0 favourites)",
+              "Wrote \"Parity Feed Three\" (0 favourites)",
+              "Wrote \"Parity Feed Four\" (0 favourites)",
+              "Followed by 1 users",
+              "Favourited 0 articles, received 0 favourites"
+            ],
+            "articlesCount": 3,
+            "favoritesGiven": 0,
+            "favoritesReceived": 0,
+            "followersCount": 1,
+            "latestArticle": {
+              "favoritesCount": 0,
+              "slug": "parity-feed-four",
+              "title": "Parity Feed Four"
+            },
+            "profileUrl": "https://conduit.example.com/profiles/parity-alice",
+            "username": "parity-alice"
+          }
+        }
+      }
+    },
+    {
+      "request": {
+        "method": "GET",
+        "path": "/profiles/johndoe/summary",
+        "auth": false,
+        "body": null
+      },
+      "response": {
+        "status": 200,
+        "contentType": "application/json",
+        "body": {
+          "summary": {
+            "activity": [
+              "Wrote \"Getting Started with Spring Boot\" (2 favourites)",
+              "Wrote \"Microservices Architecture Guide\" (1 favourites)",
+              "Followed by 2 users",
+              "Favourited 2 articles, received 3 favourites"
+            ],
+            "articlesCount": 2,
+            "favoritesGiven": 2,
+            "favoritesReceived": 3,
+            "followersCount": 2,
+            "latestArticle": {
+              "favoritesCount": 1,
+              "slug": "microservices-architecture-guide",
+              "title": "Microservices Architecture Guide"
+            },
+            "profileUrl": "https://conduit.example.com/profiles/johndoe",
+            "username": "johndoe"
+          }
+        }
+      }
+    },
+    {
+      "request": {
+        "method": "GET",
+        "path": "/profiles/no-such-user/summary",
+        "auth": false,
+        "body": null
+      },
+      "response": {
+        "status": 404,
+        "contentType": "application/json",
+        "body": {
+          "error": "Not Found",
+          "path": "/profiles/no-such-user/summary",
+          "status": 404,
+          "timestamp": "<TIMESTAMP>"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,122 @@
+{
+  "scenario": "favorite",
+  "exchanges": [
+    {
+      "request": {
+        "method": "POST",
+        "path": "/articles/parity-policy-renewed/favorite",
+        "auth": true,
+        "body": null
+      },
+      "response": {
+        "status": 200,
+        "contentType": "application/json",
+        "body": {
+          "article": {
+            "author": {
+              "bio": "Underwriter by day",
+              "following": false,
+              "image": "https://img.test/a.png",
+              "username": "parity-alice"
+            },
+            "body": "Updated body",
+            "createdAt": "<TIMESTAMP>",
+            "cursor": {
+              "data": "<TIMESTAMP>"
+            },
+            "description": "About Parity Policy One",
+            "favorited": true,
+            "favoritesCount": 1,
+            "id": "<UUID:1>",
+            "slug": "parity-policy-renewed",
+            "tagList": [
+              "claims",
+              "motor"
+            ],
+            "title": "Parity Policy Renewed",
+            "updatedAt": "<TIMESTAMP>"
+          }
+        }
+      }
+    },
+    {
+      "request": {
+        "method": "GET",
+        "path": "/articles?favorited=parity-bob",
+        "auth": false,
+        "body": null
+      },
+      "response": {
+        "status": 200,
+        "contentType": "application/json",
+        "body": {
+          "articles": [
+            {
+              "author": {
+                "bio": "Underwriter by day",
+                "following": false,
+                "image": "https://img.test/a.png",
+                "username": "parity-alice"
+              },
+              "body": "Updated body",
+              "createdAt": "<TIMESTAMP>",
+              "cursor": {
+                "data": "<TIMESTAMP>"
+              },
+              "description": "About Parity Policy One",
+              "favorited": false,
+              "favoritesCount": 1,
+              "id": "<UUID:1>",
+              "slug": "parity-policy-renewed",
+              "tagList": [
+                "claims",
+                "motor"
+              ],
+              "title": "Parity Policy Renewed",
+              "updatedAt": "<TIMESTAMP>"
+            }
+          ],
+          "articlesCount": 1
+        }
+      }
+    },
+    {
+      "request": {
+        "method": "DELETE",
+        "path": "/articles/parity-policy-renewed/favorite",
+        "auth": true,
+        "body": null
+      },
+      "response": {
+        "status": 200,
+        "contentType": "application/json",
+        "body": {
+          "article": {
+            "author": {
+              "bio": "Underwriter by day",
+              "following": false,
+              "image": "https://img.test/a.png",
+              "username": "parity-alice"
+            },
+            "body": "Updated body",
+            "createdAt": "<TIMESTAMP>",
+            "cursor": {
+              "data": "<TIMESTAMP>"
+            },
+            "description": "About Parity Policy One",
+            "favorited": false,
+            "favoritesCount": 0,
+            "id": "<UUID:1>",
+            "slug": "parity-policy-renewed",
+            "tagList": [
+              "claims",
+              "motor"
+            ],
+            "title": "Parity Policy Renewed",
+            "updatedAt": "<TIMESTAMP>"
+          }
+        }
+      }
+    }
+  ]
+}

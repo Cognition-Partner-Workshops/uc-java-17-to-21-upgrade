@@ -13,7 +13,6 @@ import com.workshop.loanservice.repository.LegacyLoanProductRepository;
 import com.workshop.loanservice.repository.LegacyPaymentRepository;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -105,15 +104,15 @@ public class LoanService {
         dto.setLoanAccountNumber(acct.getLoanAccountNumber());
         dto.setBorrowerName(acct.getBorrowerFirstName() + " " + acct.getBorrowerLastName());
         dto.setProductDescription(product != null ? product.getDescription() : acct.getProductCode());
-        dto.setOriginalAmount(parseLegacyAmount(acct.getOriginalAmount()));
-        dto.setCurrentBalance(parseLegacyAmount(acct.getCurrentBalance()));
-        dto.setInterestRate(parseLegacyDecimal(acct.getInterestRate()));
-        dto.setMonthlyPayment(parseLegacyAmount(acct.getMonthlyPayment()));
-        dto.setStatus(expandStatusCode(acct.getStatusCode()));
+        dto.setOriginalAmount(LegacyFieldParser.parseAmount(acct.getOriginalAmount()));
+        dto.setCurrentBalance(LegacyFieldParser.parseAmount(acct.getCurrentBalance()));
+        dto.setInterestRate(LegacyFieldParser.parseDecimal(acct.getInterestRate()));
+        dto.setMonthlyPayment(LegacyFieldParser.parseAmount(acct.getMonthlyPayment()));
+        dto.setStatus(LegacyFieldParser.expandStatusCode(acct.getStatusCode()));
         dto.setOriginationDate(acct.getOriginationDate());
         dto.setPropertyAddress(acct.getPropertyAddress() + ", " + acct.getPropertyCity()
                 + ", " + acct.getPropertyState() + " " + acct.getPropertyZip());
-        dto.setPropertyType(expandPropertyType(acct.getPropertyType()));
+        dto.setPropertyType(LegacyFieldParser.expandPropertyType(acct.getPropertyType()));
         return dto;
     }
 
@@ -126,7 +125,7 @@ public class LoanService {
         dto.setPhone(borrower.getPhoneNumber());
         dto.setCity(borrower.getCity());
         dto.setState(borrower.getStateCode());
-        dto.setCreditScore(parseLegacyInteger(borrower.getCreditScore()));
+        dto.setCreditScore(LegacyFieldParser.parseInteger(borrower.getCreditScore()));
         dto.setEmploymentStatus(borrower.getEmploymentStatus());
         return dto;
     }
@@ -136,75 +135,13 @@ public class LoanService {
         dto.setPaymentId(pmt.getPaymentSequenceNumber());
         dto.setLoanAccountNumber(pmt.getLoanAccountNumber());
         dto.setPaymentDate(pmt.getPaymentDate());
-        dto.setTotalAmount(parseLegacyAmount(pmt.getTotalAmount()));
-        dto.setPrincipalAmount(parseLegacyAmount(pmt.getPrincipalAmount()));
-        dto.setInterestAmount(parseLegacyAmount(pmt.getInterestAmount()));
-        dto.setEscrowAmount(parseLegacyAmount(pmt.getEscrowAmount()));
-        dto.setLateFee(parseLegacyAmount(pmt.getLateFee()));
-        dto.setType(expandPaymentType(pmt.getTypeCode()));
-        dto.setStatus(expandPaymentStatus(pmt.getStatusCode()));
+        dto.setTotalAmount(LegacyFieldParser.parseAmount(pmt.getTotalAmount()));
+        dto.setPrincipalAmount(LegacyFieldParser.parseAmount(pmt.getPrincipalAmount()));
+        dto.setInterestAmount(LegacyFieldParser.parseAmount(pmt.getInterestAmount()));
+        dto.setEscrowAmount(LegacyFieldParser.parseAmount(pmt.getEscrowAmount()));
+        dto.setLateFee(LegacyFieldParser.parseAmount(pmt.getLateFee()));
+        dto.setType(LegacyFieldParser.expandPaymentType(pmt.getTypeCode()));
+        dto.setStatus(LegacyFieldParser.expandPaymentStatus(pmt.getStatusCode()));
         return dto;
-    }
-
-    /**
-     * Parse legacy amount strings like "285,000" or "1,487.02" into BigDecimal.
-     */
-    private BigDecimal parseLegacyAmount(String amount) {
-        if (amount == null || amount.isBlank()) return BigDecimal.ZERO;
-        return new BigDecimal(amount.replace(",", ""));
-    }
-
-    private BigDecimal parseLegacyDecimal(String value) {
-        if (value == null || value.isBlank()) return BigDecimal.ZERO;
-        return new BigDecimal(value.trim());
-    }
-
-    private Integer parseLegacyInteger(String value) {
-        if (value == null || value.isBlank()) return null;
-        return Integer.parseInt(value.trim());
-    }
-
-    private String expandStatusCode(String code) {
-        if (code == null) return "Unknown";
-        return switch (code) {
-            case "ACT" -> "Active";
-            case "CLO" -> "Closed";
-            case "DFT" -> "Default";
-            case "FRB" -> "Forbearance";
-            default -> code;
-        };
-    }
-
-    private String expandPropertyType(String code) {
-        if (code == null) return "Unknown";
-        return switch (code) {
-            case "SFR" -> "Single Family Residence";
-            case "CND" -> "Condominium";
-            case "MFR" -> "Multi-Family Residence";
-            case "TWN" -> "Townhouse";
-            default -> code;
-        };
-    }
-
-    private String expandPaymentType(String code) {
-        if (code == null) return "Unknown";
-        return switch (code) {
-            case "REG" -> "Regular";
-            case "EXT" -> "Extra";
-            case "PRT" -> "Partial";
-            case "PRE" -> "Prepayment";
-            default -> code;
-        };
-    }
-
-    private String expandPaymentStatus(String code) {
-        if (code == null) return "Unknown";
-        return switch (code) {
-            case "PST" -> "Posted";
-            case "REV" -> "Reversed";
-            case "NSF" -> "Non-Sufficient Funds";
-            case "PND" -> "Pending";
-            default -> code;
-        };
     }
 }

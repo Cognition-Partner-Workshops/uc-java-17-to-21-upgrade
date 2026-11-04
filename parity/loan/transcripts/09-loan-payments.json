@@ -1,0 +1,81 @@
+{
+  "scenario": "loan-payments",
+  "exchanges": [
+    {
+      "request": {
+        "method": "GET",
+        "path": "/api/loans/LN-2019-00142/payments",
+        "auth": false,
+        "body": null
+      },
+      "response": {
+        "status": 200,
+        "contentType": "application/json",
+        "body": [
+          {
+            "escrowAmount": 355.55,
+            "interestAmount": 1074.69,
+            "lateFee": 0.0,
+            "loanAccountNumber": "LN-2019-00142",
+            "paymentDate": "12/15/2025",
+            "paymentId": "PMT-2025120001",
+            "principalAmount": 456.78,
+            "status": "Posted",
+            "totalAmount": 1487.02,
+            "type": "Regular"
+          },
+          {
+            "escrowAmount": 355.55,
+            "interestAmount": 1076.5,
+            "lateFee": 0.0,
+            "loanAccountNumber": "LN-2019-00142",
+            "paymentDate": "11/15/2025",
+            "paymentId": "PMT-2025110001",
+            "principalAmount": 454.97,
+            "status": "Posted",
+            "totalAmount": 1487.02,
+            "type": "Regular"
+          }
+        ]
+      }
+    },
+    {
+      "request": {
+        "method": "GET",
+        "path": "/api/loans/LN-2018-00089/payments",
+        "auth": false,
+        "body": null
+      },
+      "response": {
+        "status": 200,
+        "contentType": "application/json",
+        "body": [
+          {
+            "escrowAmount": 0.0,
+            "interestAmount": 779.93,
+            "lateFee": 0.0,
+            "loanAccountNumber": "LN-2018-00089",
+            "paymentDate": "12/01/2025",
+            "paymentId": "PMT-2025120003",
+            "principalAmount": 297.12,
+            "status": "Posted",
+            "totalAmount": 1077.05,
+            "type": "Regular"
+          },
+          {
+            "escrowAmount": 0.0,
+            "interestAmount": 781.23,
+            "lateFee": 47.5,
+            "loanAccountNumber": "LN-2018-00089",
+            "paymentDate": "11/01/2025",
+            "paymentId": "PMT-2025110003",
+            "principalAmount": 295.82,
+            "status": "Posted",
+            "totalAmount": 1077.05,
+            "type": "Regular"
+          }
+        ]
+      }
+    }
+  ]
+}

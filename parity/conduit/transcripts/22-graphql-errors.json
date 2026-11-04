@@ -1,0 +1,78 @@
+{
+  "scenario": "graphql-errors",
+  "exchanges": [
+    {
+      "request": {
+        "method": "POST",
+        "path": "/graphql",
+        "auth": false,
+        "body": {
+          "query": "\n        mutation {\n          createUser(input: {email: \"parity-alice@parity.test\", username: \"parity-alice\",\n                             password: \"x\"}) {\n            ... on Error { message errors { key value } }\n            ... on UserPayload { user { username } }\n          }\n        }",
+          "variables": {}
+        }
+      },
+      "response": {
+        "status": 200,
+        "contentType": "application/json",
+        "body": {
+          "data": {
+            "createUser": {
+              "errors": [
+                {
+                  "key": "email",
+                  "value": [
+                    "duplicated email"
+                  ]
+                },
+                {
+                  "key": "username",
+                  "value": [
+                    "duplicated username"
+                  ]
+                }
+              ],
+              "message": "BAD_REQUEST"
+            }
+          }
+        }
+      }
+    },
+    {
+      "request": {
+        "method": "POST",
+        "path": "/graphql",
+        "auth": true,
+        "body": {
+          "query": "mutation { deleteArticle(slug: \"no-such-article\") { success } }",
+          "variables": {}
+        }
+      },
+      "response": {
+        "status": 200,
+        "contentType": "application/json",
+        "body": {
+          "data": {
+            "deleteArticle": null
+          },
+          "errors": [
+            {
+              "extensions": {
+                "errorType": "INTERNAL"
+              },
+              "locations": [
+                {
+                  "column": 12,
+                  "line": 1
+                }
+              ],
+              "message": "io.spring.api.exception.ResourceNotFoundException: null",
+              "path": [
+                "deleteArticle"
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

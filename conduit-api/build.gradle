@@ -79,8 +79,8 @@ dependencies {
     implementation 'joda-time:joda-time:2.12.7'
     implementation 'org.xerial:sqlite-jdbc:3.45.3.0'
 
-    compileOnly 'org.projectlombok:lombok'
-    annotationProcessor 'org.projectlombok:lombok'
+    compileOnly 'org.projectlombok:lombok:1.18.26'
+    annotationProcessor 'org.projectlombok:lombok:1.18.26'
 
     testImplementation 'io.rest-assured:rest-assured'
     testImplementation 'io.rest-assured:json-path'
@@ -114,5 +114,12 @@ tasks.named('generateJava') {
 tasks.named('bootRun') {
     doFirst {
         delete './dev.db'
+    }
+}
+
+// ./gradlew compileJava compileTestJava -Pxlint : compile with -Xlint:all to count warnings
+if (project.hasProperty('xlint')) {
+    tasks.withType(JavaCompile).configureEach {
+        options.compilerArgs << '-Xlint:all'
     }
 }

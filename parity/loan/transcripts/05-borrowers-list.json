@@ -1,0 +1,74 @@
+{
+  "scenario": "borrowers-list",
+  "exchanges": [
+    {
+      "request": {
+        "method": "GET",
+        "path": "/api/borrowers",
+        "auth": false,
+        "body": null
+      },
+      "response": {
+        "status": 200,
+        "contentType": "application/json",
+        "body": [
+          {
+            "city": "Springfield",
+            "creditScore": 745,
+            "email": "j.mitchell@email.com",
+            "employmentStatus": "EMPLOYED",
+            "fullName": "James R. Mitchell",
+            "id": "B-10001",
+            "loans": null,
+            "phone": "217-555-0142",
+            "state": "IL"
+          },
+          {
+            "city": "Portland",
+            "creditScore": 780,
+            "email": "s.chen@email.com",
+            "employmentStatus": "EMPLOYED",
+            "fullName": "Sarah L. Chen",
+            "id": "B-10002",
+            "loans": null,
+            "phone": "503-555-0198",
+            "state": "OR"
+          },
+          {
+            "city": "Austin",
+            "creditScore": 692,
+            "email": "m.torres@email.com",
+            "employmentStatus": "SELF-EMP",
+            "fullName": "Michael A. Torres",
+            "id": "B-10003",
+            "loans": null,
+            "phone": "512-555-0167",
+            "state": "TX"
+          },
+          {
+            "city": "Denver",
+            "creditScore": 810,
+            "email": "e.johnson@email.com",
+            "employmentStatus": "EMPLOYED",
+            "fullName": "Emily M. Johnson",
+            "id": "B-10004",
+            "loans": null,
+            "phone": "303-555-0134",
+            "state": "CO"
+          },
+          {
+            "city": "Phoenix",
+            "creditScore": 658,
+            "email": "r.williams@email.com",
+            "employmentStatus": "RETIRED",
+            "fullName": "Robert Williams",
+            "id": "B-10005",
+            "loans": null,
+            "phone": "602-555-0156",
+            "state": "AZ"
+          }
+        ]
+      }
+    }
+  ]
+}

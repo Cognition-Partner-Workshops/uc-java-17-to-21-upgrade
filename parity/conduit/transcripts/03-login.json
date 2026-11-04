@@ -1,0 +1,51 @@
+{
+  "scenario": "login",
+  "exchanges": [
+    {
+      "request": {
+        "method": "POST",
+        "path": "/users/login",
+        "auth": false,
+        "body": {
+          "user": {
+            "email": "parity-alice@parity.test",
+            "password": "parity-pass-123"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "contentType": "application/json",
+        "body": {
+          "user": {
+            "bio": "",
+            "email": "parity-alice@parity.test",
+            "image": "https://static.productionready.io/images/smiley-cyrus.jpg",
+            "token": "<JWT:1>",
+            "username": "parity-alice"
+          }
+        }
+      }
+    },
+    {
+      "request": {
+        "method": "POST",
+        "path": "/users/login",
+        "auth": false,
+        "body": {
+          "user": {
+            "email": "parity-alice@parity.test",
+            "password": "wrong"
+          }
+        }
+      },
+      "response": {
+        "status": 422,
+        "contentType": "application/json",
+        "body": {
+          "message": "invalid email or password"
+        }
+      }
+    }
+  ]
+}

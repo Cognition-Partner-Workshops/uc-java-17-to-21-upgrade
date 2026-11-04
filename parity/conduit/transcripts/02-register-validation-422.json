@@ -1,0 +1,64 @@
+{
+  "scenario": "register-validation-422",
+  "exchanges": [
+    {
+      "request": {
+        "method": "POST",
+        "path": "/users",
+        "auth": false,
+        "body": {
+          "user": {
+            "email": "parity-alice@parity.test",
+            "password": "parity-pass-123",
+            "username": "parity-alice"
+          }
+        }
+      },
+      "response": {
+        "status": 422,
+        "contentType": "application/json",
+        "body": {
+          "errors": {
+            "email": [
+              "duplicated email"
+            ],
+            "username": [
+              "duplicated username"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "request": {
+        "method": "POST",
+        "path": "/users",
+        "auth": false,
+        "body": {
+          "user": {
+            "email": "not-an-email",
+            "password": "",
+            "username": ""
+          }
+        }
+      },
+      "response": {
+        "status": 422,
+        "contentType": "application/json",
+        "body": {
+          "errors": {
+            "email": [
+              "should be an email"
+            ],
+            "password": [
+              "can't be empty"
+            ],
+            "username": [
+              "can't be empty"
+            ]
+          }
+        }
+      }
+    }
+  ]
+}

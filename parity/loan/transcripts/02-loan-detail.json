@@ -1,0 +1,80 @@
+{
+  "scenario": "loan-detail",
+  "exchanges": [
+    {
+      "request": {
+        "method": "GET",
+        "path": "/api/loans/LN-2019-00142",
+        "auth": false,
+        "body": null
+      },
+      "response": {
+        "status": 200,
+        "contentType": "application/json",
+        "body": {
+          "borrowerName": "James Mitchell",
+          "currentBalance": 271432.56,
+          "interestRate": 4.75,
+          "loanAccountNumber": "LN-2019-00142",
+          "monthlyPayment": 1487.02,
+          "originalAmount": 285000,
+          "originationDate": "02/15/2019",
+          "productDescription": "30-Year Fixed Rate Mortgage",
+          "propertyAddress": "742 Elm Street, Springfield, IL 62701",
+          "propertyType": "Single Family Residence",
+          "status": "Active"
+        }
+      }
+    },
+    {
+      "request": {
+        "method": "GET",
+        "path": "/api/loans/LN-2018-00089",
+        "auth": false,
+        "body": null
+      },
+      "response": {
+        "status": 200,
+        "contentType": "application/json",
+        "body": {
+          "borrowerName": "Michael Torres",
+          "currentBalance": 178234.12,
+          "interestRate": 5.25,
+          "loanAccountNumber": "LN-2018-00089",
+          "monthlyPayment": 1077.05,
+          "originalAmount": 195000,
+          "originationDate": "07/01/2018",
+          "productDescription": "5/1 Adjustable Rate Mortgage",
+          "propertyAddress": "305 Pine Road, Austin, TX 78701",
+          "propertyType": "Single Family Residence",
+          "status": "Active"
+        }
+      }
+    },
+    {
+      "request": {
+        "method": "GET",
+        "path": "/api/loans/LN-2021-00567",
+        "auth": false,
+        "body": null
+      },
+      "response": {
+        "status": 200,
+        "contentType": "application/json",
+        "body": {
+          "borrowerName": "Emily Johnson",
+          "currentBalance": 498123.78,
+          "interestRate": 3.875,
+          "loanAccountNumber": "LN-2021-00567",
+          "monthlyPayment": 2468.35,
+          "originalAmount": 525000,
+          "originationDate": "10/01/2021",
+          "productDescription": "30-Year Fixed Rate Mortgage",
+          "propertyAddress": "89 Maple Drive, Denver, CO 80202",
+          "propertyType": "Townhouse",
+          "status": "Active"
+        }
+      }
+    }
+  ]
+}

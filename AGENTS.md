@@ -9,15 +9,20 @@ Two independent Spring Boot apps in one repo. Baseline is **Java 17 / Spring Boo
 | Build + test + gates | `./gradlew build` | `./mvnw verify` |
 | Tests only | `./gradlew test` | `./mvnw test` |
 | Format | `./gradlew spotlessApply` (check: `spotlessCheck`) | n/a |
-| Coverage report | `build/reports/jacoco/test/html/index.html` | n/a |
+| Coverage gate | JaCoCo instruction ≥ 0.80 (`build/reports/jacoco/test/html/index.html`) | JaCoCo instruction ≥ 0.80 (`target/site/jacoco/index.html`) |
+| `-Xlint:all` warning count | `./gradlew clean compileJava compileTestJava -Pxlint` | `./mvnw -Pxlint clean test-compile` |
+| Behavioural parity (repo root) | `make parity APP=conduit` | `make parity APP=loan` |
+| Fan-out latency (repo root) | `make perf APP=conduit` | `make perf APP=loan` |
 | Run | `./gradlew bootRun` | `./mvnw spring-boot:run` |
 
 `make baseline` runs both builds from the repo root. The active JDK is whatever `JAVA_HOME` points to.
 
+`make parity` starts the app on a free port with a fresh database, replays the scenarios in `parity/scenarios_<app>.py` and diffs the normalized responses against `parity/<app>/transcripts/`. Pass `TARGET=http://host:port` to check an app you started yourself (it must be freshly started). See `parity/README.md` for the normalization rules. Parity needs `pip install -r parity/requirements.txt`.
+
 ## Guardrails
 
 - **Do not edit transcripts, golden files, or tests to make parity or a build pass.** If behaviour changed, fix the code, or stop and explain why the change is intended.
-- **Do not lower coverage gates** (Conduit JaCoCo minimum is 0.80) and do not skip them with `-x jacocoTestCoverageVerification`, `-DskipTests`, `@Disabled`, or exclusions for non-generated code.
+- **Do not lower coverage gates** (Conduit JaCoCo minimum is 0.80, loan service 0.80) and do not skip them with `-x jacocoTestCoverageVerification`, `-DskipTests`, `@Disabled`, or exclusions for non-generated code.
 - Keep both apps on the **same** Spring Boot version and the same Java release.
 - Keep the build tools as they are: Gradle wrapper for Conduit, Maven wrapper for the loan service. Bump wrapper versions rather than replacing them.
 - Use `jakarta.*` APIs. The only `javax.*` imports allowed are JDK packages (for example `javax.crypto`).

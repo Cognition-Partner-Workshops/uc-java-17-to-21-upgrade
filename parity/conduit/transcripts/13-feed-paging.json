@@ -1,0 +1,307 @@
+{
+  "scenario": "feed-paging",
+  "exchanges": [
+    {
+      "request": {
+        "method": "POST",
+        "path": "/profiles/parity-alice/follow",
+        "auth": true,
+        "body": null
+      },
+      "response": {
+        "status": 200,
+        "contentType": "application/json",
+        "body": {
+          "profile": {
+            "bio": "Underwriter by day",
+            "following": true,
+            "image": "https://img.test/a.png",
+            "username": "parity-alice"
+          }
+        }
+      }
+    },
+    {
+      "request": {
+        "method": "POST",
+        "path": "/articles",
+        "auth": true,
+        "body": {
+          "article": {
+            "body": "Body of Parity Feed Two",
+            "description": "About Parity Feed Two",
+            "tagList": [
+              "feed"
+            ],
+            "title": "Parity Feed Two"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "contentType": "application/json",
+        "body": {
+          "article": {
+            "author": {
+              "bio": "Underwriter by day",
+              "following": false,
+              "image": "https://img.test/a.png",
+              "username": "parity-alice"
+            },
+            "body": "Body of Parity Feed Two",
+            "createdAt": "<TIMESTAMP>",
+            "cursor": {
+              "data": "<TIMESTAMP>"
+            },
+            "description": "About Parity Feed Two",
+            "favorited": false,
+            "favoritesCount": 0,
+            "id": "<UUID:1>",
+            "slug": "parity-feed-two",
+            "tagList": [
+              "feed"
+            ],
+            "title": "Parity Feed Two",
+            "updatedAt": "<TIMESTAMP>"
+          }
+        }
+      }
+    },
+    {
+      "request": {
+        "method": "POST",
+        "path": "/articles",
+        "auth": true,
+        "body": {
+          "article": {
+            "body": "Body of Parity Feed Three",
+            "description": "About Parity Feed Three",
+            "tagList": [
+              "feed"
+            ],
+            "title": "Parity Feed Three"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "contentType": "application/json",
+        "body": {
+          "article": {
+            "author": {
+              "bio": "Underwriter by day",
+              "following": false,
+              "image": "https://img.test/a.png",
+              "username": "parity-alice"
+            },
+            "body": "Body of Parity Feed Three",
+            "createdAt": "<TIMESTAMP>",
+            "cursor": {
+              "data": "<TIMESTAMP>"
+            },
+            "description": "About Parity Feed Three",
+            "favorited": false,
+            "favoritesCount": 0,
+            "id": "<UUID:2>",
+            "slug": "parity-feed-three",
+            "tagList": [
+              "feed"
+            ],
+            "title": "Parity Feed Three",
+            "updatedAt": "<TIMESTAMP>"
+          }
+        }
+      }
+    },
+    {
+      "request": {
+        "method": "POST",
+        "path": "/articles",
+        "auth": true,
+        "body": {
+          "article": {
+            "body": "Body of Parity Feed Four",
+            "description": "About Parity Feed Four",
+            "tagList": [
+              "feed"
+            ],
+            "title": "Parity Feed Four"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "contentType": "application/json",
+        "body": {
+          "article": {
+            "author": {
+              "bio": "Underwriter by day",
+              "following": false,
+              "image": "https://img.test/a.png",
+              "username": "parity-alice"
+            },
+            "body": "Body of Parity Feed Four",
+            "createdAt": "<TIMESTAMP>",
+            "cursor": {
+              "data": "<TIMESTAMP>"
+            },
+            "description": "About Parity Feed Four",
+            "favorited": false,
+            "favoritesCount": 0,
+            "id": "<UUID:3>",
+            "slug": "parity-feed-four",
+            "tagList": [
+              "feed"
+            ],
+            "title": "Parity Feed Four",
+            "updatedAt": "<TIMESTAMP>"
+          }
+        }
+      }
+    },
+    {
+      "request": {
+        "method": "GET",
+        "path": "/articles/feed?limit=2&offset=0",
+        "auth": true,
+        "body": null
+      },
+      "response": {
+        "status": 200,
+        "contentType": "application/json",
+        "body": {
+          "articles": [
+            {
+              "author": {
+                "bio": "Underwriter by day",
+                "following": true,
+                "image": "https://img.test/a.png",
+                "username": "parity-alice"
+              },
+              "body": "Updated body",
+              "createdAt": "<TIMESTAMP>",
+              "cursor": {
+                "data": "<TIMESTAMP>"
+              },
+              "description": "About Parity Policy One",
+              "favorited": false,
+              "favoritesCount": 0,
+              "id": "<UUID:4>",
+              "slug": "parity-policy-renewed",
+              "tagList": [
+                "claims",
+                "motor"
+              ],
+              "title": "Parity Policy Renewed",
+              "updatedAt": "<TIMESTAMP>"
+            }
+          ],
+          "articlesCount": 4
+        }
+      }
+    },
+    {
+      "request": {
+        "method": "GET",
+        "path": "/articles/feed?limit=2&offset=2",
+        "auth": true,
+        "body": null
+      },
+      "response": {
+        "status": 200,
+        "contentType": "application/json",
+        "body": {
+          "articles": [
+            {
+              "author": {
+                "bio": "Underwriter by day",
+                "following": true,
+                "image": "https://img.test/a.png",
+                "username": "parity-alice"
+              },
+              "body": "Body of Parity Feed Two",
+              "createdAt": "<TIMESTAMP>",
+              "cursor": {
+                "data": "<TIMESTAMP>"
+              },
+              "description": "About Parity Feed Two",
+              "favorited": false,
+              "favoritesCount": 0,
+              "id": "<UUID:1>",
+              "slug": "parity-feed-two",
+              "tagList": [
+                "feed"
+              ],
+              "title": "Parity Feed Two",
+              "updatedAt": "<TIMESTAMP>"
+            },
+            {
+              "author": {
+                "bio": "Underwriter by day",
+                "following": true,
+                "image": "https://img.test/a.png",
+                "username": "parity-alice"
+              },
+              "body": "Body of Parity Feed Three",
+              "createdAt": "<TIMESTAMP>",
+              "cursor": {
+                "data": "<TIMESTAMP>"
+              },
+              "description": "About Parity Feed Three",
+              "favorited": false,
+              "favoritesCount": 0,
+              "id": "<UUID:2>",
+              "slug": "parity-feed-three",
+              "tagList": [
+                "feed"
+              ],
+              "title": "Parity Feed Three",
+              "updatedAt": "<TIMESTAMP>"
+            }
+          ],
+          "articlesCount": 4
+        }
+      }
+    },
+    {
+      "request": {
+        "method": "GET",
+        "path": "/articles/feed?limit=2&offset=4",
+        "auth": true,
+        "body": null
+      },
+      "response": {
+        "status": 200,
+        "contentType": "application/json",
+        "body": {
+          "articles": [
+            {
+              "author": {
+                "bio": "Underwriter by day",
+                "following": true,
+                "image": "https://img.test/a.png",
+                "username": "parity-alice"
+              },
+              "body": "Body of Parity Feed Four",
+              "createdAt": "<TIMESTAMP>",
+              "cursor": {
+                "data": "<TIMESTAMP>"
+              },
+              "description": "About Parity Feed Four",
+              "favorited": false,
+              "favoritesCount": 0,
+              "id": "<UUID:3>",
+              "slug": "parity-feed-four",
+              "tagList": [
+                "feed"
+              ],
+              "title": "Parity Feed Four",
+              "updatedAt": "<TIMESTAMP>"
+            }
+          ],
+          "articlesCount": 4
+        }
+      }
+    }
+  ]
+}

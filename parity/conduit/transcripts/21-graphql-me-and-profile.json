@@ -1,0 +1,95 @@
+{
+  "scenario": "graphql-me-and-profile",
+  "exchanges": [
+    {
+      "request": {
+        "method": "POST",
+        "path": "/graphql",
+        "auth": true,
+        "body": {
+          "query": "query { me { username email profile { bio image } } }",
+          "variables": {}
+        }
+      },
+      "response": {
+        "status": 200,
+        "contentType": "application/json",
+        "body": {
+          "data": {
+            "me": {
+              "email": "parity-alice@parity.test",
+              "profile": {
+                "bio": "Underwriter by day",
+                "image": "https://img.test/a.png"
+              },
+              "username": "parity-alice"
+            }
+          }
+        }
+      }
+    },
+    {
+      "request": {
+        "method": "POST",
+        "path": "/graphql",
+        "auth": true,
+        "body": {
+          "query": "query { profile(username: \"parity-alice\") { profile { username bio following } } }",
+          "variables": {}
+        }
+      },
+      "response": {
+        "status": 200,
+        "contentType": "application/json",
+        "body": {
+          "data": {
+            "profile": {
+              "profile": {
+                "bio": "Underwriter by day",
+                "following": true,
+                "username": "parity-alice"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "request": {
+        "method": "POST",
+        "path": "/graphql",
+        "auth": false,
+        "body": {
+          "query": "query { me { username } }",
+          "variables": {}
+        }
+      },
+      "response": {
+        "status": 200,
+        "contentType": "application/json",
+        "body": {
+          "data": {
+            "me": null
+          },
+          "errors": [
+            {
+              "extensions": {
+                "errorType": "INTERNAL"
+              },
+              "locations": [
+                {
+                  "column": 9,
+                  "line": 1
+                }
+              ],
+              "message": "org.springframework.web.bind.MissingRequestHeaderException: Required request header 'Authorization' for method parameter type String is not present",
+              "path": [
+                "me"
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ]
+}
