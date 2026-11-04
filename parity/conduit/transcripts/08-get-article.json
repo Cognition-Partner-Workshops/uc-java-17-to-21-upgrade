@@ -1,0 +1,81 @@
+{
+  "scenario": "get-article",
+  "exchanges": [
+    {
+      "request": {
+        "method": "GET",
+        "path": "/articles/parity-policy-one",
+        "auth": false,
+        "body": null
+      },
+      "response": {
+        "status": 200,
+        "contentType": "application/json",
+        "body": {
+          "article": {
+            "author": {
+              "bio": "Underwriter by day",
+              "following": false,
+              "image": "https://img.test/a.png",
+              "username": "parity-alice"
+            },
+            "body": "Body of Parity Policy One",
+            "createdAt": "<TIMESTAMP>",
+            "cursor": {
+              "data": "<TIMESTAMP>"
+            },
+            "description": "About Parity Policy One",
+            "favorited": false,
+            "favoritesCount": 0,
+            "id": "<UUID:1>",
+            "slug": "parity-policy-one",
+            "tagList": [
+              "claims",
+              "motor"
+            ],
+            "title": "Parity Policy One",
+            "updatedAt": "<TIMESTAMP>"
+          }
+        }
+      }
+    },
+    {
+      "request": {
+        "method": "GET",
+        "path": "/articles/parity-policy-one",
+        "auth": true,
+        "body": null
+      },
+      "response": {
+        "status": 200,
+        "contentType": "application/json",
+        "body": {
+          "article": {
+            "author": {
+              "bio": "Underwriter by day",
+              "following": false,
+              "image": "https://img.test/a.png",
+              "username": "parity-alice"
+            },
+            "body": "Body of Parity Policy One",
+            "createdAt": "<TIMESTAMP>",
+            "cursor": {
+              "data": "<TIMESTAMP>"
+            },
+            "description": "About Parity Policy One",
+            "favorited": false,
+            "favoritesCount": 0,
+            "id": "<UUID:1>",
+            "slug": "parity-policy-one",
+            "tagList": [
+              "claims",
+              "motor"
+            ],
+            "title": "Parity Policy One",
+            "updatedAt": "<TIMESTAMP>"
+          }
+        }
+      }
+    }
+  ]
+}

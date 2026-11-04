@@ -1,0 +1,48 @@
+{
+  "scenario": "graphql-create-article",
+  "exchanges": [
+    {
+      "request": {
+        "method": "POST",
+        "path": "/graphql",
+        "auth": true,
+        "body": {
+          "query": "\n        mutation($input: CreateArticleInput!) {\n          createArticle(input: $input) {\n            article { slug title description tagList favorited favoritesCount author { username } }\n          }\n        }",
+          "variables": {
+            "input": {
+              "body": "GraphQL body",
+              "description": "Via GraphQL",
+              "tagList": [
+                "graphql"
+              ],
+              "title": "Parity GraphQL Article"
+            }
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "contentType": "application/json",
+        "body": {
+          "data": {
+            "createArticle": {
+              "article": {
+                "author": {
+                  "username": "parity-alice"
+                },
+                "description": "Via GraphQL",
+                "favorited": false,
+                "favoritesCount": 0,
+                "slug": "parity-graphql-article",
+                "tagList": [
+                  "graphql"
+                ],
+                "title": "Parity GraphQL Article"
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}

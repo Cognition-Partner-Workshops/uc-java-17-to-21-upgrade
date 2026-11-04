@@ -1,0 +1,23 @@
+{
+  "scenario": "borrower-exposure-not-found",
+  "exchanges": [
+    {
+      "request": {
+        "method": "GET",
+        "path": "/api/borrowers/B-99999/exposure",
+        "auth": false,
+        "body": null
+      },
+      "response": {
+        "status": 500,
+        "contentType": "application/json",
+        "body": {
+          "error": "Internal Server Error",
+          "path": "/api/borrowers/B-99999/exposure",
+          "status": 500,
+          "timestamp": "<TIMESTAMP>"
+        }
+      }
+    }
+  ]
+}

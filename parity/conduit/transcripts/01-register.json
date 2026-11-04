@@ -1,0 +1,59 @@
+{
+  "scenario": "register",
+  "exchanges": [
+    {
+      "request": {
+        "method": "POST",
+        "path": "/users",
+        "auth": false,
+        "body": {
+          "user": {
+            "email": "parity-alice@parity.test",
+            "password": "parity-pass-123",
+            "username": "parity-alice"
+          }
+        }
+      },
+      "response": {
+        "status": 201,
+        "contentType": "application/json",
+        "body": {
+          "user": {
+            "bio": "",
+            "email": "parity-alice@parity.test",
+            "image": "https://static.productionready.io/images/smiley-cyrus.jpg",
+            "token": "<JWT:1>",
+            "username": "parity-alice"
+          }
+        }
+      }
+    },
+    {
+      "request": {
+        "method": "POST",
+        "path": "/users",
+        "auth": false,
+        "body": {
+          "user": {
+            "email": "parity-bob@parity.test",
+            "password": "parity-pass-123",
+            "username": "parity-bob"
+          }
+        }
+      },
+      "response": {
+        "status": 201,
+        "contentType": "application/json",
+        "body": {
+          "user": {
+            "bio": "",
+            "email": "parity-bob@parity.test",
+            "image": "https://static.productionready.io/images/smiley-cyrus.jpg",
+            "token": "<JWT:2>",
+            "username": "parity-bob"
+          }
+        }
+      }
+    }
+  ]
+}

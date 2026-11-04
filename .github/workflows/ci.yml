@@ -1,0 +1,101 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  conduit:
+    name: conduit-api (JDK 17)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+          cache: gradle
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+          cache-dependency-path: parity/requirements.txt
+      - run: pip install -r parity/requirements.txt
+      - name: Build, test, Spotless, JaCoCo gate
+        working-directory: conduit-api
+        run: ./gradlew --no-daemon clean build
+      - name: Behavioural parity
+        run: make parity APP=conduit
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: conduit-reports
+          path: |
+            conduit-api/build/reports/
+            conduit-api/build/test-results/
+
+  loan:
+    name: loan-service (JDK 17)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+          cache: maven
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+          cache-dependency-path: parity/requirements.txt
+      - run: pip install -r parity/requirements.txt
+      - name: Build, test, JaCoCo gate
+        working-directory: loan-service
+        run: ./mvnw -B clean verify
+      - name: Behavioural parity
+        run: make parity APP=loan
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: loan-reports
+          path: |
+            loan-service/target/site/jacoco/
+            loan-service/target/surefire-reports/
+
+  jdk21-probe:
+    name: JDK 21 probe (${{ matrix.app }}, report only)
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    strategy:
+      fail-fast: false
+      matrix:
+        app: [conduit, loan]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: ${{ matrix.app == 'conduit' && 'gradle' || 'maven' }}
+      - name: Build on JDK 21 without changes
+        run: |
+          set -o pipefail
+          if [ "${{ matrix.app }}" = conduit ]; then
+            (cd conduit-api && ./gradlew --no-daemon clean build --warning-mode all) 2>&1 | tee probe.log
+          else
+            (cd loan-service && ./mvnw -B clean verify) 2>&1 | tee probe.log
+          fi
+      - name: Summarise
+        if: always()
+        run: |
+          {
+            echo "### JDK 21 probe: ${{ matrix.app }}"
+            echo '```'
+            grep -E "FAILED|ERROR|What went wrong|Unrecognized|NoSuchFieldError|deprecat|WARNING" probe.log | sort | uniq -c | sort -rn | head -40 || true
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"

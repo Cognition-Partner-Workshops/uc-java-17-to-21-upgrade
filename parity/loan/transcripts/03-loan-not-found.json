@@ -1,0 +1,23 @@
+{
+  "scenario": "loan-not-found",
+  "exchanges": [
+    {
+      "request": {
+        "method": "GET",
+        "path": "/api/loans/LN-0000-00000",
+        "auth": false,
+        "body": null
+      },
+      "response": {
+        "status": 500,
+        "contentType": "application/json",
+        "body": {
+          "error": "Internal Server Error",
+          "path": "/api/loans/LN-0000-00000",
+          "status": 500,
+          "timestamp": "<TIMESTAMP>"
+        }
+      }
+    }
+  ]
+}

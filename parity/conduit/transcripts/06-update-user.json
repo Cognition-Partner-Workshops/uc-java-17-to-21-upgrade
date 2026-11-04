@@ -1,0 +1,54 @@
+{
+  "scenario": "update-user",
+  "exchanges": [
+    {
+      "request": {
+        "method": "PUT",
+        "path": "/user",
+        "auth": true,
+        "body": {
+          "user": {
+            "bio": "Underwriter by day",
+            "image": "https://img.test/a.png"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "contentType": "application/json",
+        "body": {
+          "user": {
+            "bio": "Underwriter by day",
+            "email": "parity-alice@parity.test",
+            "image": "https://img.test/a.png",
+            "token": "<JWT:1>",
+            "username": "parity-alice"
+          }
+        }
+      }
+    },
+    {
+      "request": {
+        "method": "PUT",
+        "path": "/user",
+        "auth": true,
+        "body": {
+          "user": {
+            "email": "parity-bob@parity.test"
+          }
+        }
+      },
+      "response": {
+        "status": 422,
+        "contentType": "application/json",
+        "body": {
+          "errors": {
+            "email": [
+              "email already exist"
+            ]
+          }
+        }
+      }
+    }
+  ]
+}

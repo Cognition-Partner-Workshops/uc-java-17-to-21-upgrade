@@ -1,0 +1,70 @@
+{
+  "scenario": "update-article",
+  "exchanges": [
+    {
+      "request": {
+        "method": "PUT",
+        "path": "/articles/parity-policy-one",
+        "auth": true,
+        "body": {
+          "article": {
+            "body": "Updated body",
+            "title": "Parity Policy Renewed"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "contentType": "application/json",
+        "body": {
+          "article": {
+            "author": {
+              "bio": "Underwriter by day",
+              "following": false,
+              "image": "https://img.test/a.png",
+              "username": "parity-alice"
+            },
+            "body": "Updated body",
+            "createdAt": "<TIMESTAMP>",
+            "cursor": {
+              "data": "<TIMESTAMP>"
+            },
+            "description": "About Parity Policy One",
+            "favorited": false,
+            "favoritesCount": 0,
+            "id": "<UUID:1>",
+            "slug": "parity-policy-renewed",
+            "tagList": [
+              "claims",
+              "motor"
+            ],
+            "title": "Parity Policy Renewed",
+            "updatedAt": "<TIMESTAMP>"
+          }
+        }
+      }
+    },
+    {
+      "request": {
+        "method": "PUT",
+        "path": "/articles/parity-policy-renewed",
+        "auth": true,
+        "body": {
+          "article": {
+            "body": "hijack"
+          }
+        }
+      },
+      "response": {
+        "status": 403,
+        "contentType": "application/json",
+        "body": {
+          "error": "Forbidden",
+          "path": "/articles/parity-policy-renewed",
+          "status": 403,
+          "timestamp": "<TIMESTAMP>"
+        }
+      }
+    }
+  ]
+}

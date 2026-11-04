@@ -1,0 +1,85 @@
+{
+  "scenario": "follow",
+  "exchanges": [
+    {
+      "request": {
+        "method": "POST",
+        "path": "/profiles/parity-alice/follow",
+        "auth": true,
+        "body": null
+      },
+      "response": {
+        "status": 200,
+        "contentType": "application/json",
+        "body": {
+          "profile": {
+            "bio": "Underwriter by day",
+            "following": true,
+            "image": "https://img.test/a.png",
+            "username": "parity-alice"
+          }
+        }
+      }
+    },
+    {
+      "request": {
+        "method": "GET",
+        "path": "/profiles/parity-alice",
+        "auth": true,
+        "body": null
+      },
+      "response": {
+        "status": 200,
+        "contentType": "application/json",
+        "body": {
+          "profile": {
+            "bio": "Underwriter by day",
+            "following": true,
+            "image": "https://img.test/a.png",
+            "username": "parity-alice"
+          }
+        }
+      }
+    },
+    {
+      "request": {
+        "method": "DELETE",
+        "path": "/profiles/parity-alice/follow",
+        "auth": true,
+        "body": null
+      },
+      "response": {
+        "status": 200,
+        "contentType": "application/json",
+        "body": {
+          "profile": {
+            "bio": "Underwriter by day",
+            "following": false,
+            "image": "https://img.test/a.png",
+            "username": "parity-alice"
+          }
+        }
+      }
+    },
+    {
+      "request": {
+        "method": "GET",
+        "path": "/profiles/parity-alice",
+        "auth": true,
+        "body": null
+      },
+      "response": {
+        "status": 200,
+        "contentType": "application/json",
+        "body": {
+          "profile": {
+            "bio": "Underwriter by day",
+            "following": false,
+            "image": "https://img.test/a.png",
+            "username": "parity-alice"
+          }
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "scenario": "loan-payments-unknown-loan",
+  "exchanges": [
+    {
+      "request": {
+        "method": "GET",
+        "path": "/api/loans/LN-0000-00000/payments",
+        "auth": false,
+        "body": null
+      },
+      "response": {
+        "status": 200,
+        "contentType": "application/json",
+        "body": []
+      }
+    },
+    {
+      "request": {
+        "method": "GET",
+        "path": "/api/loans/not-a-loan/payments",
+        "auth": false,
+        "body": null
+      },
+      "response": {
+        "status": 200,
+        "contentType": "application/json",
+        "body": []
+      }
+    }
+  ]
+}

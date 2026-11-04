@@ -1,0 +1,36 @@
+{
+  "scenario": "borrower-malformed-id",
+  "exchanges": [
+    {
+      "request": {
+        "method": "GET",
+        "path": "/api/borrowers/%20",
+        "auth": false,
+        "body": null
+      },
+      "response": {
+        "status": 500,
+        "contentType": "application/json",
+        "body": {
+          "error": "Internal Server Error",
+          "path": "/api/borrowers/%20",
+          "status": 500,
+          "timestamp": "<TIMESTAMP>"
+        }
+      }
+    },
+    {
+      "request": {
+        "method": "GET",
+        "path": "/api/borrowers/B-10001%2F..",
+        "auth": false,
+        "body": null
+      },
+      "response": {
+        "status": 400,
+        "contentType": "text/html",
+        "body": "HTTP Status 400 – Bad Request"
+      }
+    }
+  ]
+}

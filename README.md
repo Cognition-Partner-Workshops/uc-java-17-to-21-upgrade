@@ -36,6 +36,22 @@ cd loan-service && ./mvnw spring-boot:run   # http://localhost:8080  (e.g. curl 
 
 Both default to port 8080; pass `--server.port=...` to run them side by side.
 
+## Behavioural parity and latency
+
+```bash
+pip install -r parity/requirements.txt
+make parity APP=conduit     # 22 recorded HTTP scenarios, non-zero exit on any diff
+make parity APP=loan        # 13 recorded HTTP scenarios
+make perf APP=conduit       # latency of the blocking fan-out endpoint
+```
+
+## Docs
+
+- `docs/LAB.md`: workshop exercises with copy-paste Devin prompts
+- `docs/BASELINE.md`: Java 17 numbers and what happens on JDK 21
+- `docs/MERGE_NOTES.md`: how the two source repos were combined
+- `parity/README.md`: normalization rules
+
 ## Repository layout
 
 ```

@@ -1,0 +1,97 @@
+{
+  "scenario": "comment",
+  "exchanges": [
+    {
+      "request": {
+        "method": "POST",
+        "path": "/articles/parity-policy-renewed/comments",
+        "auth": true,
+        "body": {
+          "comment": {
+            "body": "Looks good"
+          }
+        }
+      },
+      "response": {
+        "status": 201,
+        "contentType": "application/json",
+        "body": {
+          "comment": {
+            "author": {
+              "bio": "",
+              "following": false,
+              "image": "https://static.productionready.io/images/smiley-cyrus.jpg",
+              "username": "parity-bob"
+            },
+            "body": "Looks good",
+            "createdAt": "<TIMESTAMP>",
+            "cursor": {
+              "data": "<TIMESTAMP>"
+            },
+            "id": "<UUID:1>",
+            "updatedAt": "<TIMESTAMP>"
+          }
+        }
+      }
+    },
+    {
+      "request": {
+        "method": "GET",
+        "path": "/articles/parity-policy-renewed/comments",
+        "auth": false,
+        "body": null
+      },
+      "response": {
+        "status": 200,
+        "contentType": "application/json",
+        "body": {
+          "comments": [
+            {
+              "author": {
+                "bio": "",
+                "following": false,
+                "image": "https://static.productionready.io/images/smiley-cyrus.jpg",
+                "username": "parity-bob"
+              },
+              "body": "Looks good",
+              "createdAt": "<TIMESTAMP>",
+              "cursor": {
+                "data": "<TIMESTAMP>"
+              },
+              "id": "<UUID:1>",
+              "updatedAt": "<TIMESTAMP>"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "request": {
+        "method": "DELETE",
+        "path": "/articles/parity-policy-renewed/comments/<UUID:1>",
+        "auth": true,
+        "body": null
+      },
+      "response": {
+        "status": 204,
+        "contentType": "",
+        "body": null
+      }
+    },
+    {
+      "request": {
+        "method": "GET",
+        "path": "/articles/parity-policy-renewed/comments",
+        "auth": false,
+        "body": null
+      },
+      "response": {
+        "status": 200,
+        "contentType": "application/json",
+        "body": {
+          "comments": []
+        }
+      }
+    }
+  ]
+}

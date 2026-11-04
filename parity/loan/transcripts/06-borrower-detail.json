@@ -1,0 +1,116 @@
+{
+  "scenario": "borrower-detail",
+  "exchanges": [
+    {
+      "request": {
+        "method": "GET",
+        "path": "/api/borrowers/B-10001",
+        "auth": false,
+        "body": null
+      },
+      "response": {
+        "status": 200,
+        "contentType": "application/json",
+        "body": {
+          "city": "Springfield",
+          "creditScore": 745,
+          "email": "j.mitchell@email.com",
+          "employmentStatus": "EMPLOYED",
+          "fullName": "James R. Mitchell",
+          "id": "B-10001",
+          "loans": [
+            {
+              "borrowerName": "James Mitchell",
+              "currentBalance": 271432.56,
+              "interestRate": 4.75,
+              "loanAccountNumber": "LN-2019-00142",
+              "monthlyPayment": 1487.02,
+              "originalAmount": 285000,
+              "originationDate": "02/15/2019",
+              "productDescription": "30-Year Fixed Rate Mortgage",
+              "propertyAddress": "742 Elm Street, Springfield, IL 62701",
+              "propertyType": "Single Family Residence",
+              "status": "Active"
+            }
+          ],
+          "phone": "217-555-0142",
+          "state": "IL"
+        }
+      }
+    },
+    {
+      "request": {
+        "method": "GET",
+        "path": "/api/borrowers/B-10002",
+        "auth": false,
+        "body": null
+      },
+      "response": {
+        "status": 200,
+        "contentType": "application/json",
+        "body": {
+          "city": "Portland",
+          "creditScore": 780,
+          "email": "s.chen@email.com",
+          "employmentStatus": "EMPLOYED",
+          "fullName": "Sarah L. Chen",
+          "id": "B-10002",
+          "loans": [
+            {
+              "borrowerName": "Sarah Chen",
+              "currentBalance": 312876.43,
+              "interestRate": 3.125,
+              "loanAccountNumber": "LN-2020-00398",
+              "monthlyPayment": 2924.18,
+              "originalAmount": 420000,
+              "originationDate": "04/01/2020",
+              "productDescription": "15-Year Fixed Rate Mortgage",
+              "propertyAddress": "1100 Oak Avenue, Portland, OR 97201",
+              "propertyType": "Condominium",
+              "status": "Active"
+            }
+          ],
+          "phone": "503-555-0198",
+          "state": "OR"
+        }
+      }
+    },
+    {
+      "request": {
+        "method": "GET",
+        "path": "/api/borrowers/B-10005",
+        "auth": false,
+        "body": null
+      },
+      "response": {
+        "status": 200,
+        "contentType": "application/json",
+        "body": {
+          "city": "Phoenix",
+          "creditScore": 658,
+          "email": "r.williams@email.com",
+          "employmentStatus": "RETIRED",
+          "fullName": "Robert Williams",
+          "id": "B-10005",
+          "loans": [
+            {
+              "borrowerName": "Robert Williams",
+              "currentBalance": 142567.9,
+              "interestRate": 4.25,
+              "loanAccountNumber": "LN-2017-00034",
+              "monthlyPayment": 811.61,
+              "originalAmount": 165000,
+              "originationDate": "03/01/2017",
+              "productDescription": "FHA 30-Year Fixed",
+              "propertyAddress": "2200 Cedar Lane, Phoenix, AZ 85001",
+              "propertyType": "Single Family Residence",
+              "status": "Active"
+            }
+          ],
+          "phone": "602-555-0156",
+          "state": "AZ"
+        }
+      }
+    }
+  ]
+}

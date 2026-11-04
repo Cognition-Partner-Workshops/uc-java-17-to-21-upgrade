@@ -1,0 +1,44 @@
+{
+  "scenario": "unauthorized-401",
+  "exchanges": [
+    {
+      "request": {
+        "method": "GET",
+        "path": "/user",
+        "auth": false,
+        "body": null
+      },
+      "response": {
+        "status": 401,
+        "contentType": "",
+        "body": null
+      }
+    },
+    {
+      "request": {
+        "method": "GET",
+        "path": "/articles/feed",
+        "auth": false,
+        "body": null
+      },
+      "response": {
+        "status": 401,
+        "contentType": "",
+        "body": null
+      }
+    },
+    {
+      "request": {
+        "method": "GET",
+        "path": "/user",
+        "auth": true,
+        "body": null
+      },
+      "response": {
+        "status": 401,
+        "contentType": "",
+        "body": null
+      }
+    }
+  ]
+}

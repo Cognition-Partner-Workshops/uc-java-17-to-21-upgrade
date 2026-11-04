@@ -1,0 +1,246 @@
+{
+  "scenario": "article-listing",
+  "exchanges": [
+    {
+      "request": {
+        "method": "GET",
+        "path": "/articles?author=parity-alice&limit=2",
+        "auth": false,
+        "body": null
+      },
+      "response": {
+        "status": 200,
+        "contentType": "application/json",
+        "body": {
+          "articles": [
+            {
+              "author": {
+                "bio": "Underwriter by day",
+                "following": false,
+                "image": "https://img.test/a.png",
+                "username": "parity-alice"
+              },
+              "body": "Body of Parity Feed Four",
+              "createdAt": "<TIMESTAMP>",
+              "cursor": {
+                "data": "<TIMESTAMP>"
+              },
+              "description": "About Parity Feed Four",
+              "favorited": false,
+              "favoritesCount": 0,
+              "id": "<UUID:1>",
+              "slug": "parity-feed-four",
+              "tagList": [
+                "feed"
+              ],
+              "title": "Parity Feed Four",
+              "updatedAt": "<TIMESTAMP>"
+            },
+            {
+              "author": {
+                "bio": "Underwriter by day",
+                "following": false,
+                "image": "https://img.test/a.png",
+                "username": "parity-alice"
+              },
+              "body": "Body of Parity Feed Three",
+              "createdAt": "<TIMESTAMP>",
+              "cursor": {
+                "data": "<TIMESTAMP>"
+              },
+              "description": "About Parity Feed Three",
+              "favorited": false,
+              "favoritesCount": 0,
+              "id": "<UUID:2>",
+              "slug": "parity-feed-three",
+              "tagList": [
+                "feed"
+              ],
+              "title": "Parity Feed Three",
+              "updatedAt": "<TIMESTAMP>"
+            }
+          ],
+          "articlesCount": 4
+        }
+      }
+    },
+    {
+      "request": {
+        "method": "GET",
+        "path": "/articles?tag=feed",
+        "auth": false,
+        "body": null
+      },
+      "response": {
+        "status": 200,
+        "contentType": "application/json",
+        "body": {
+          "articles": [
+            {
+              "author": {
+                "bio": "Underwriter by day",
+                "following": false,
+                "image": "https://img.test/a.png",
+                "username": "parity-alice"
+              },
+              "body": "Body of Parity Feed Four",
+              "createdAt": "<TIMESTAMP>",
+              "cursor": {
+                "data": "<TIMESTAMP>"
+              },
+              "description": "About Parity Feed Four",
+              "favorited": false,
+              "favoritesCount": 0,
+              "id": "<UUID:1>",
+              "slug": "parity-feed-four",
+              "tagList": [
+                "feed"
+              ],
+              "title": "Parity Feed Four",
+              "updatedAt": "<TIMESTAMP>"
+            },
+            {
+              "author": {
+                "bio": "Underwriter by day",
+                "following": false,
+                "image": "https://img.test/a.png",
+                "username": "parity-alice"
+              },
+              "body": "Body of Parity Feed Three",
+              "createdAt": "<TIMESTAMP>",
+              "cursor": {
+                "data": "<TIMESTAMP>"
+              },
+              "description": "About Parity Feed Three",
+              "favorited": false,
+              "favoritesCount": 0,
+              "id": "<UUID:2>",
+              "slug": "parity-feed-three",
+              "tagList": [
+                "feed"
+              ],
+              "title": "Parity Feed Three",
+              "updatedAt": "<TIMESTAMP>"
+            },
+            {
+              "author": {
+                "bio": "Underwriter by day",
+                "following": false,
+                "image": "https://img.test/a.png",
+                "username": "parity-alice"
+              },
+              "body": "Body of Parity Feed Two",
+              "createdAt": "<TIMESTAMP>",
+              "cursor": {
+                "data": "<TIMESTAMP>"
+              },
+              "description": "About Parity Feed Two",
+              "favorited": false,
+              "favoritesCount": 0,
+              "id": "<UUID:3>",
+              "slug": "parity-feed-two",
+              "tagList": [
+                "feed"
+              ],
+              "title": "Parity Feed Two",
+              "updatedAt": "<TIMESTAMP>"
+            }
+          ],
+          "articlesCount": 3
+        }
+      }
+    },
+    {
+      "request": {
+        "method": "GET",
+        "path": "/articles?limit=3&offset=0",
+        "auth": false,
+        "body": null
+      },
+      "response": {
+        "status": 200,
+        "contentType": "application/json",
+        "body": {
+          "articles": [
+            {
+              "author": {
+                "bio": "Software architect passionate about clean code",
+                "following": false,
+                "image": "https://api.dicebear.com/7.x/avataaars/svg?seed=Jane",
+                "username": "janedoe"
+              },
+              "body": "Testing is crucial for maintaining code quality. This article covers unit testing, integration testing, and end-to-end testing in Spring Boot applications.\\n\\n## Testing Layers\\n1. Unit Tests with JUnit and Mockito\\n2. Integration Tests with @SpringBootTest\\n3. API Tests with MockMvc\\n4. Database Tests with @DataJpaTest\\n\\nLet's explore each testing strategy...",
+              "createdAt": "<TIMESTAMP>",
+              "cursor": {
+                "data": "<TIMESTAMP>"
+              },
+              "description": "A complete guide to testing strategies in Spring Boot",
+              "favorited": false,
+              "favoritesCount": 1,
+              "id": "article-5",
+              "slug": "testing-spring-boot-applications",
+              "tagList": [
+                "best-practices",
+                "java",
+                "spring-boot"
+              ],
+              "title": "Testing Spring Boot Applications",
+              "updatedAt": "<TIMESTAMP>"
+            },
+            {
+              "author": {
+                "bio": "DevOps engineer and cloud enthusiast",
+                "following": false,
+                "image": "https://api.dicebear.com/7.x/avataaars/svg?seed=Bob",
+                "username": "bobsmith"
+              },
+              "body": "Docker has revolutionized how we deploy applications. In this tutorial, we'll learn how to containerize a Spring Boot application and deploy it using Docker.\\n\\n## Why Docker?\\n- Consistent environments\\n- Easy deployment\\n- Isolation\\n- Portability\\n\\n## Creating a Dockerfile\\nHere's a simple Dockerfile for a Spring Boot app...",
+              "createdAt": "<TIMESTAMP>",
+              "cursor": {
+                "data": "<TIMESTAMP>"
+              },
+              "description": "Containerize your Java applications with Docker",
+              "favorited": false,
+              "favoritesCount": 1,
+              "id": "article-4",
+              "slug": "docker-for-java-developers",
+              "tagList": [
+                "java",
+                "spring-boot",
+                "tutorial"
+              ],
+              "title": "Docker for Java Developers",
+              "updatedAt": "<TIMESTAMP>"
+            },
+            {
+              "author": {
+                "bio": "Full-stack developer and tech enthusiast",
+                "following": false,
+                "image": "https://api.dicebear.com/7.x/avataaars/svg?seed=John",
+                "username": "johndoe"
+              },
+              "body": "Microservices architecture has become increasingly popular, but it's not a silver bullet. This guide will help you understand when and how to implement microservices effectively.\\n\\n## What are Microservices?\\nMicroservices are an architectural style that structures an application as a collection of loosely coupled services...\\n\\n## Benefits\\n- Independent deployment\\n- Technology diversity\\n- Fault isolation\\n- Scalability",
+              "createdAt": "<TIMESTAMP>",
+              "cursor": {
+                "data": "<TIMESTAMP>"
+              },
+              "description": "Understanding microservices patterns and when to use them",
+              "favorited": false,
+              "favoritesCount": 1,
+              "id": "article-3",
+              "slug": "microservices-architecture-guide",
+              "tagList": [
+                "best-practices",
+                "microservices",
+                "spring-boot"
+              ],
+              "title": "Microservices Architecture Guide",
+              "updatedAt": "<TIMESTAMP>"
+            }
+          ],
+          "articlesCount": 9
+        }
+      }
+    }
+  ]
+}

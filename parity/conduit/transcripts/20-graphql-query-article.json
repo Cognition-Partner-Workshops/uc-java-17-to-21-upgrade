@@ -1,0 +1,78 @@
+{
+  "scenario": "graphql-query-article",
+  "exchanges": [
+    {
+      "request": {
+        "method": "POST",
+        "path": "/graphql",
+        "auth": false,
+        "body": {
+          "query": "\n        query($slug: String!) {\n          article(slug: $slug) { slug title body tagList createdAt author { username following } }\n        }",
+          "variables": {
+            "slug": "parity-graphql-article"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "contentType": "application/json",
+        "body": {
+          "data": {
+            "article": {
+              "author": {
+                "following": false,
+                "username": "parity-alice"
+              },
+              "body": "GraphQL body",
+              "createdAt": "<TIMESTAMP>",
+              "slug": "parity-graphql-article",
+              "tagList": [
+                "graphql"
+              ],
+              "title": "Parity GraphQL Article"
+            }
+          }
+        }
+      }
+    },
+    {
+      "request": {
+        "method": "POST",
+        "path": "/graphql",
+        "auth": false,
+        "body": {
+          "query": "\n        query {\n          articles(first: 2, authoredBy: \"parity-alice\") {\n            edges { node { slug title } }\n            pageInfo { hasNextPage hasPreviousPage }\n          }\n        }",
+          "variables": {}
+        }
+      },
+      "response": {
+        "status": 200,
+        "contentType": "application/json",
+        "body": {
+          "data": {
+            "articles": {
+              "edges": [
+                {
+                  "node": {
+                    "slug": "parity-graphql-article",
+                    "title": "Parity GraphQL Article"
+                  }
+                },
+                {
+                  "node": {
+                    "slug": "parity-feed-four",
+                    "title": "Parity Feed Four"
+                  }
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": true,
+                "hasPreviousPage": false
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}

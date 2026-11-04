@@ -1,0 +1,59 @@
+{
+  "scenario": "not-found-404",
+  "exchanges": [
+    {
+      "request": {
+        "method": "GET",
+        "path": "/articles/no-such-article",
+        "auth": false,
+        "body": null
+      },
+      "response": {
+        "status": 404,
+        "contentType": "application/json",
+        "body": {
+          "error": "Not Found",
+          "path": "/articles/no-such-article",
+          "status": 404,
+          "timestamp": "<TIMESTAMP>"
+        }
+      }
+    },
+    {
+      "request": {
+        "method": "GET",
+        "path": "/profiles/no-such-user",
+        "auth": false,
+        "body": null
+      },
+      "response": {
+        "status": 404,
+        "contentType": "application/json",
+        "body": {
+          "error": "Not Found",
+          "path": "/profiles/no-such-user",
+          "status": 404,
+          "timestamp": "<TIMESTAMP>"
+        }
+      }
+    },
+    {
+      "request": {
+        "method": "POST",
+        "path": "/articles/no-such-article/favorite",
+        "auth": true,
+        "body": null
+      },
+      "response": {
+        "status": 404,
+        "contentType": "application/json",
+        "body": {
+          "error": "Not Found",
+          "path": "/articles/no-such-article/favorite",
+          "status": 404,
+          "timestamp": "<TIMESTAMP>"
+        }
+      }
+    }
+  ]
+}

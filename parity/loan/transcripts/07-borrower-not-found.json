@@ -1,0 +1,23 @@
+{
+  "scenario": "borrower-not-found",
+  "exchanges": [
+    {
+      "request": {
+        "method": "GET",
+        "path": "/api/borrowers/B-99999",
+        "auth": false,
+        "body": null
+      },
+      "response": {
+        "status": 500,
+        "contentType": "application/json",
+        "body": {
+          "error": "Internal Server Error",
+          "path": "/api/borrowers/B-99999",
+          "status": 500,
+          "timestamp": "<TIMESTAMP>"
+        }
+      }
+    }
+  ]
+}

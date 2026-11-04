@@ -1,0 +1,31 @@
+{
+  "scenario": "tags",
+  "exchanges": [
+    {
+      "request": {
+        "method": "GET",
+        "path": "/tags",
+        "auth": false,
+        "body": null
+      },
+      "response": {
+        "status": 200,
+        "contentType": "application/json",
+        "body": {
+          "tags": [
+            "api-design",
+            "best-practices",
+            "claims",
+            "feed",
+            "java",
+            "microservices",
+            "motor",
+            "spring-boot",
+            "tutorial",
+            "web-development"
+          ]
+        }
+      }
+    }
+  ]
+}

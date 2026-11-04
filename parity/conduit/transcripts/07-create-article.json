@@ -1,0 +1,84 @@
+{
+  "scenario": "create-article",
+  "exchanges": [
+    {
+      "request": {
+        "method": "POST",
+        "path": "/articles",
+        "auth": true,
+        "body": {
+          "article": {
+            "body": "Body of Parity Policy One",
+            "description": "About Parity Policy One",
+            "tagList": [
+              "claims",
+              "motor"
+            ],
+            "title": "Parity Policy One"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "contentType": "application/json",
+        "body": {
+          "article": {
+            "author": {
+              "bio": "Underwriter by day",
+              "following": false,
+              "image": "https://img.test/a.png",
+              "username": "parity-alice"
+            },
+            "body": "Body of Parity Policy One",
+            "createdAt": "<TIMESTAMP>",
+            "cursor": {
+              "data": "<TIMESTAMP>"
+            },
+            "description": "About Parity Policy One",
+            "favorited": false,
+            "favoritesCount": 0,
+            "id": "<UUID:1>",
+            "slug": "parity-policy-one",
+            "tagList": [
+              "claims",
+              "motor"
+            ],
+            "title": "Parity Policy One",
+            "updatedAt": "<TIMESTAMP>"
+          }
+        }
+      }
+    },
+    {
+      "request": {
+        "method": "POST",
+        "path": "/articles",
+        "auth": true,
+        "body": {
+          "article": {
+            "body": "",
+            "description": "",
+            "title": ""
+          }
+        }
+      },
+      "response": {
+        "status": 422,
+        "contentType": "application/json",
+        "body": {
+          "errors": {
+            "body": [
+              "can't be empty"
+            ],
+            "description": [
+              "can't be empty"
+            ],
+            "title": [
+              "can't be empty"
+            ]
+          }
+        }
+      }
+    }
+  ]
+}
