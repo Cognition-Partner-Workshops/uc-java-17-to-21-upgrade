@@ -1,0 +1,19 @@
+uc-java-17-to-21-upgrade
+Copyright (c) 2026 Cognition-Partner-Workshops
+
+This repository combines two MIT-licensed applications. Each keeps its
+original license file, which applies to the code in that directory.
+
+conduit-api/
+  RealWorld "Conduit" backend, derived from
+  https://github.com/gothinkster/spring-boot-realworld-example-app
+  Imported from Cognition-Partner-Workshops/uc-spring-boot-upgrade-microservice-extraction
+  MIT License, Copyright (c) 2022 Aisensiy -- see conduit-api/LICENSE
+
+loan-service/
+  Loan servicing API over a legacy-style H2 schema.
+  Imported from Cognition-Partner-Workshops/uc-data-source-migration-jdbc-normalization
+  MIT License, Copyright (c) 2026 Cognition-Partner-Workshops -- see loan-service/LICENSE
+
+Root-level files (build orchestration, parity harness, docs, CI) are under the
+MIT License in ./LICENSE.

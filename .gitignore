@@ -1,0 +1,25 @@
+# Build output
+build/
+target/
+.gradle/
+out/
+*.class
+*.log
+
+# Local databases
+*.db
+
+# IDE / OS
+.idea/
+*.iml
+.vscode/
+.DS_Store
+
+# Python (parity harness)
+.venv/
+__pycache__/
+*.pyc
+
+# Parity / perf run output (committed transcripts live in parity/<app>/transcripts/)
+parity/.runs/
+perf/results/
