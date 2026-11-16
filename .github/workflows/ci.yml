@@ -10,14 +10,14 @@ permissions:
 
 jobs:
   conduit:
-    name: conduit-api (JDK 17)
+    name: conduit-api (JDK 21)
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
-          java-version: '17'
+          java-version: '21'
           cache: gradle
       - uses: actions/setup-python@v5
         with:
@@ -39,14 +39,14 @@ jobs:
             conduit-api/build/test-results/
 
   loan:
-    name: loan-service (JDK 17)
+    name: loan-service (JDK 21)
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
-          java-version: '17'
+          java-version: '21'
           cache: maven
       - uses: actions/setup-python@v5
         with:
