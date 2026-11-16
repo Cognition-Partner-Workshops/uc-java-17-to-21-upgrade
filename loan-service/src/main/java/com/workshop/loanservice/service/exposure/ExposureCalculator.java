@@ -21,30 +21,31 @@ public final class ExposureCalculator {
         List<PaymentRecord> payments = new ArrayList<>();
 
         for (ExposureComponent component : components) {
-            if (component instanceof OutstandingPrincipal) {
-                OutstandingPrincipal principal = (OutstandingPrincipal) component;
-                original = original.add(principal.getOriginalAmount());
-                outstanding = outstanding.add(principal.getCurrentBalance());
-            } else if (component instanceof EscrowHolding) {
-                EscrowHolding holding = (EscrowHolding) component;
-                escrow = escrow.add(holding.getBalance());
-            } else if (component instanceof PaymentRecord) {
-                PaymentRecord payment = (PaymentRecord) component;
-                paid = paid.add(payment.getTotalAmount());
-                lateFees = lateFees.add(payment.getLateFee());
-                payments.add(payment);
-            } else if (component instanceof DelinquencyNotice) {
-                DelinquencyNotice notice = (DelinquencyNotice) component;
-                maxDaysPastDue = Math.max(maxDaysPastDue, notice.getDaysPastDue());
-            } else {
-                throw new IllegalArgumentException("Unknown exposure component: " + component.getClass().getName());
+            switch (component) {
+                case KnownExposureComponent known -> {
+                    switch (known) {
+                        case OutstandingPrincipal principal -> {
+                            original = original.add(principal.getOriginalAmount());
+                            outstanding = outstanding.add(principal.getCurrentBalance());
+                        }
+                        case EscrowHolding holding -> escrow = escrow.add(holding.getBalance());
+                        case PaymentRecord payment -> {
+                            paid = paid.add(payment.getTotalAmount());
+                            lateFees = lateFees.add(payment.getLateFee());
+                            payments.add(payment);
+                        }
+                        case DelinquencyNotice notice ->
+                                maxDaysPastDue = Math.max(maxDaysPastDue, notice.getDaysPastDue());
+                    }
+                }
+                default -> throw new IllegalArgumentException("Unknown exposure component: " + component.getClass().getName());
             }
         }
 
         LocalDate lastPaymentDate = null;
         if (!payments.isEmpty()) {
             payments.sort(Comparator.comparing(PaymentRecord::getPaymentDate));
-            lastPaymentDate = payments.get(payments.size() - 1).getPaymentDate();
+            lastPaymentDate = payments.getLast().getPaymentDate();
         }
         return new ExposureTotals(original, outstanding, escrow, paid, lateFees, maxDaysPastDue, lastPaymentDate);
     }
