@@ -4,23 +4,25 @@ import io.spring.application.data.UserData;
 import io.spring.infrastructure.mybatis.readservice.ProfileSummaryReadService;
 import io.spring.infrastructure.mybatis.readservice.UserReadService;
 import java.net.MalformedURLException;
-import java.net.URL;
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Semaphore;
 import java.util.function.Supplier;
-import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Service;
 
 /**
- * Builds a profile summary by fanning out three blocking reads (articles, followers, favourites) on
- * a fixed-size thread pool. Each read carries a simulated remote-call delay.
+ * Builds a profile summary by fanning out three blocking reads (articles, followers, favourites),
+ * each on its own virtual thread. Each read carries a simulated remote-call delay; a semaphore caps
+ * how many reads are in flight at once across all requests.
  */
 @Service
 public class ProfileSummaryService implements DisposableBean {
@@ -28,26 +30,25 @@ public class ProfileSummaryService implements DisposableBean {
 
   private final UserReadService userReadService;
   private final ProfileSummaryReadService profileSummaryReadService;
-  private final ThreadPoolTaskExecutor executor;
+  private final ExecutorService executor;
+  private final Semaphore readPermits;
   private final long simulatedLatencyMs;
   private final String publicBaseUrl;
 
   public ProfileSummaryService(
       UserReadService userReadService,
       ProfileSummaryReadService profileSummaryReadService,
-      @Value("${conduit.profile-summary.pool-size:4}") int poolSize,
+      @Value("${conduit.profile-summary.max-concurrent-reads:256}") int maxConcurrentReads,
       @Value("${conduit.profile-summary.simulated-latency-ms:50}") long simulatedLatencyMs,
       @Value("${conduit.public-base-url:https://conduit.example.com}") String publicBaseUrl) {
     this.userReadService = userReadService;
     this.profileSummaryReadService = profileSummaryReadService;
     this.simulatedLatencyMs = simulatedLatencyMs;
     this.publicBaseUrl = publicBaseUrl;
-    this.executor = new ThreadPoolTaskExecutor();
-    this.executor.setCorePoolSize(poolSize);
-    this.executor.setMaxPoolSize(poolSize);
-    this.executor.setQueueCapacity(10_000);
-    this.executor.setThreadNamePrefix("profile-summary-");
-    this.executor.initialize();
+    this.readPermits = new Semaphore(maxConcurrentReads);
+    this.executor =
+        Executors.newThreadPerTaskExecutor(
+            Thread.ofVirtual().name("profile-summary-", 0).factory());
   }
 
   public Optional<ProfileSummaryData> summarize(String username) {
@@ -67,21 +68,13 @@ public class ProfileSummaryService implements DisposableBean {
     int followers = followersFuture.join();
     int favoritesGiven = favoritesGivenFuture.join();
 
-    int favoritesReceived = 0;
-    for (AuthoredArticle article : articles) {
-      favoritesReceived += article.getFavoritesCount();
-    }
-
-    AuthoredArticle latestArticle = null;
-    if (!articles.isEmpty()) {
-      latestArticle = articles.get(articles.size() - 1);
-    }
+    int favoritesReceived = articles.stream().mapToInt(AuthoredArticle::favoritesCount).sum();
+    AuthoredArticle latestArticle = articles.isEmpty() ? null : articles.getLast();
 
     List<ProfileActivity> activities = new ArrayList<>(articles);
     activities.add(new FollowerTally(followers));
     activities.add(new FavoriteTally(favoritesGiven, favoritesReceived));
-    List<String> activity =
-        activities.stream().map(ActivityDescriber::describe).collect(Collectors.toList());
+    List<String> activity = activities.stream().map(ActivityDescriber::describe).toList();
 
     return Optional.of(
         new ProfileSummaryData(
@@ -98,11 +91,25 @@ public class ProfileSummaryService implements DisposableBean {
   private <T> CompletableFuture<T> fetch(Supplier<T> call) {
     return CompletableFuture.supplyAsync(
         () -> {
-          log.debug("profile summary read on thread {}", Thread.currentThread().getId());
-          simulateRemoteCall();
-          return call.get();
+          log.debug("profile summary read on thread {}", Thread.currentThread().threadId());
+          acquireReadPermit();
+          try {
+            simulateRemoteCall();
+            return call.get();
+          } finally {
+            readPermits.release();
+          }
         },
         executor);
+  }
+
+  private void acquireReadPermit() {
+    try {
+      readPermits.acquire();
+    } catch (InterruptedException e) {
+      Thread.currentThread().interrupt();
+      throw new IllegalStateException("Interrupted waiting for a profile summary read", e);
+    }
   }
 
   private void simulateRemoteCall() {
@@ -119,14 +126,15 @@ public class ProfileSummaryService implements DisposableBean {
 
   private String profileUrl(String username) {
     try {
-      return new URL(publicBaseUrl + "/profiles/" + username).toString();
-    } catch (MalformedURLException e) {
+      return URI.create(publicBaseUrl + "/profiles/" + username).toURL().toString();
+    } catch (MalformedURLException | IllegalArgumentException e) {
       throw new IllegalStateException("Bad public base URL: " + publicBaseUrl, e);
     }
   }
 
+  /** Stops accepting reads and waits for in-flight ones to finish. */
   @Override
   public void destroy() {
-    executor.shutdown();
+    executor.close();
   }
 }
